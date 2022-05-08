@@ -4,7 +4,7 @@ from gensim.models import KeyedVectors
 
 async def websocket_request_handler(websocket, path):
     client_data = await websocket.recv()
-    print('Received: ' + client_data)
+    print('<- ' + client_data)
     tmp = client_data.split("0")
     response_data = ''
     if len(tmp) == 3:
@@ -22,6 +22,7 @@ async def websocket_request_handler(websocket, path):
             response_data = model.most_similar(negative=negTmp, topn=indexTmp)[indexTmp-1][0]
     if len(response_data) == 0:
         response_data = model.most_similar(negative=['c'], topn=1)[0][0]
+    print('=> ' + response_data)
     # send the data back to the client websocket.
     await websocket.send(response_data)
 
