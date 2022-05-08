@@ -23,7 +23,6 @@ async def websocket_request_handler(websocket, path):
     if len(response_data) == 0:
         response_data = model.most_similar(negative=['c'], topn=1)[0][0]
     print('=> ' + response_data)
-    # send the data back to the client websocket.
     await websocket.send(response_data)
 
 def start_websocket_server(host, port_number):
