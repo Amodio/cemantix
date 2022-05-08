@@ -53,6 +53,7 @@ function askAword() {
     console.log(e)
   }
 }
+
 async function jokerTime() {
   while (document.getElementById("button3").innerHTML == processingStr) {
     const tmp = JSON.parse(localStorage.getItem("guesses"))
