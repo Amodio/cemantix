@@ -1,5 +1,5 @@
 # cemantix
-Bot for a game where you have to guess a word per day
+Bot for a game where you have to guess a word per day.
 
 * Fetch a word2vec model from the creator of the game (121 MB): https://embeddings.net/embeddings/frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin
 * Run [websocket.py](websocket.py?raw=true "websocket.py") from the same directory (needs: `pip install gensim`)
@@ -8,6 +8,7 @@ Bot for a game where you have to guess a word per day
 * Click the 'Joker!' button and enjoy!
 
 ![Joker button](misc/joker_btn.png?raw=true "Joker button")
+![Joker running](misc/joker_processing.png?raw=true "Joker running")
 ![Run example](misc/run.png?raw=true "Run example")
 
 I went to 150 ms of sleep time (1st line of `inject.js`), the bug with one more word sent (16th here) is fixed.
