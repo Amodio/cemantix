@@ -2,7 +2,6 @@ import websockets
 import asyncio
 from gensim.models import KeyedVectors
 
-# create handler for each connection
 async def websocket_request_handler(websocket, path):
     client_data = await websocket.recv()
     print('Received: ' + client_data)
@@ -19,14 +18,13 @@ async def websocket_request_handler(websocket, path):
                 response_data = model.most_similar(positive=posTmp, negative=negTmp, topn=indexTmp)[indexTmp-1][0]
             else:
                 response_data = model.most_similar(positive=posTmp, topn=indexTmp)[indexTmp-1][0]
-        elif len(tmp[1]) > 0 and len(tmp[1]) > 0:
+        elif len(tmp[1]) > 0 and len(negTmp) > 0:
             response_data = model.most_similar(negative=negTmp, topn=indexTmp)[indexTmp-1][0]
     if len(response_data) == 0:
         response_data = model.most_similar(negative=['c'], topn=1)[0][0]
     # send the data back to the client websocket.
     await websocket.send(response_data)
 
-# create and start the websocket server listen on the provided host and port number.
 def start_websocket_server(host, port_number):
     websocket_server = websockets.serve(websocket_request_handler, host, port_number)
     print('Listening on port: ' + str(port_number))
