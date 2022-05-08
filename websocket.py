@@ -34,7 +34,7 @@ def start_websocket_server(host, port_number):
 
 if __name__ == '__main__':
     global model
-    print('Loading the modele...', end = '', flush = True)
-    model = KeyedVectors.load_word2vec_format( "frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin", binary=True, unicode_errors="ignore")
+    print('Loading the model...', end = '', flush = True)
+    model = KeyedVectors.load_word2vec_format("frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin", binary=True, unicode_errors="ignore")
     print(' OK')
     start_websocket_server("localhost", 8080)
