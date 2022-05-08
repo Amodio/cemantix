@@ -10,6 +10,7 @@ Bot for a game where you have to guess a word per day
 ![Joker button](misc/joker_btn.png?raw=true "Joker button")
 ![Run example](misc/run.png?raw=true "Run example")
 
+I went to 150 ms of sleep time (1st line of `inject.js`), the bug with one more word sent (16th here) is fixed.
 
 # Note
 In order to fetch the right model, I have tested all of them on two words:
