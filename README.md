@@ -13,7 +13,7 @@ Bot for a game where you have to guess a word per day
 I went to 150 ms of sleep time (1st line of `inject.js`), the bug with one more word sent (16th here) is fixed.
 
 # Note
-In order to fetch the right model, I have tested all of them on two words:
+In order to fetch the [right model](https://fauconnier.github.io/#data "right model"), I have tested all of them on two words:
 ---
 ![Model Benchmarking](misc/model_benchmark.png?raw=true "Model Benchmarking")
 
