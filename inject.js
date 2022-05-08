@@ -90,7 +90,6 @@ function injectCSS() {
 function addButton() {
   document.getElementById("form").insertAdjacentHTML('beforebegin', '<button id="button3">' + jokerStr + '</button>')
   const element = document.getElementById("button3")
-  element.onclick = "toggleButton"
   element.addEventListener("click", () => {
     toggleButton()
   });
