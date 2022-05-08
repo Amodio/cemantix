@@ -1,5 +1,5 @@
 # cemantix
-Bot
+Bot for a game where you have to guess a word per day: https://cemantix.herokuapp.com
 
 * Fetch a word2vec model from the creator of the game (121 MB): https://embeddings.net/embeddings/frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin
 * Run websocket.py (needs: `pip install gensim`)
@@ -7,6 +7,8 @@ Bot
 * Click the 'Joker!' button and enjoy!
 
 ![Joker button](joker_btn.png?raw=true "Joker button")
+![Run example](run.png?raw=true "Run example")
+
 
 # Note
 In order to fetch the right model, I have tested all of them on two words:
