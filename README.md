@@ -4,7 +4,7 @@ Bot for a game where you have to guess a word per day
 * Fetch a word2vec model from the creator of the game (121 MB): https://embeddings.net/embeddings/frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin
 * Run `websocket.py` (needs: `pip install gensim`)
 * Go to https://cemantix.herokuapp.com
-* Load `inject.js` into your console or preferably with the Chrome extension [Custom JavaScript for Websites 2](https://chrome.google.com/webstore/detail/custom-javascript-for-web/ddbjnfjiigjmcpcpkmhogomapikjbjdk "Custom JavaScript for Websites 2")
+* Load `inject.js` into your console (F12) or preferably in the Chrome extension [Custom JavaScript for Websites 2](https://chrome.google.com/webstore/detail/custom-javascript-for-web/ddbjnfjiigjmcpcpkmhogomapikjbjdk "Custom JavaScript for Websites 2")
 * Click the 'Joker!' button and enjoy!
 
 ![Joker button](joker_btn.png?raw=true "Joker button")
