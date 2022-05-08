@@ -1,5 +1,5 @@
 # cemantix
-Bot for a game where you have to guess a word per day.
+Bot for a web game where you have to guess a word each day.
 
 * Fetch a [word2vec model](https://embeddings.net/embeddings/frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin "word2vec model") (121 MB) from the creator of the game
 * Run [websocket.py](websocket.py?raw=true "websocket.py") from the same directory (needs: `pip install gensim`)
