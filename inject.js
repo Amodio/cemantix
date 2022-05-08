@@ -43,7 +43,6 @@ function askAword() {
       indexWords = 1
       previous_request = positiveWords.toString() + '0' + negativeWords.toString()
     }
-    console.log(previous_request + '0' + indexWords)
     ws.send(previous_request + '0' + indexWords)
   };
   ws.onmessage = function(e) {
