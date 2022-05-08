@@ -44,16 +44,13 @@ function askAword() {
       previous_request = positiveWords.toString() + '0' + negativeWords.toString()
     }
     ws.send(previous_request + '0' + indexWords)
-  };
+  }
   ws.onmessage = function(e) {
-    console.log('got:', e)
+    //console.log('got:', e)
     tryWord(e.data)
-  };
+  }
   ws.onerror = function(e) {
     console.log(e)
-  };
-  ws.onclose = function(e) {
-    console.log('socket closed:', e)
   }
 }
 async function jokerTime() {
@@ -70,7 +67,7 @@ async function jokerTime() {
 }
 
 function toggleButton() {
-  const element = document.getElementById("button3");
+  const element = document.getElementById("button3")
   if (element.innerHTML == jokerStr) {
     element.innerHTML = processingStr
     jokerTime()
@@ -82,7 +79,7 @@ function toggleButton() {
 }
 
 function injectCSS() {
-  const style = document.createElement("style");
+  const style = document.createElement("style")
   style.innerHTML = '#button3{position:relative;padding:8px 16px;background:gold;border:none;outline:none;border-radius:2px;cursor:pointer;float:left}#button3:active{background:red}.button__text{font:bold 20px san-serif;transition:all 0.2s}.button--loading .button__text{opacity:0.4}.button--loading::after{content:"";position:absolute;width:16px;height:16px;top:0;left:0;right:0;bottom:0;margin:auto;border:4px solid transparent;border-top-color:#ffffff;border-radius:50%;animation:button-loading-spinner 1s ease infinite}@keyframes button-loading-spinner{from{transform:rotate(0turn)}to{transform:rotate(1turn)}}'
   document.getElementsByTagName("head")[0].appendChild(style)
 }
@@ -92,7 +89,7 @@ function addButton() {
   const element = document.getElementById("button3")
   element.addEventListener("click", () => {
     toggleButton()
-  });
+  })
   const tmp = JSON.parse(localStorage.getItem("guesses"))
   if (tmp && tmp[0][3] == 1000)
     element.innerHTML = bingoStr
