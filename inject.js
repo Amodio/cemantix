@@ -19,20 +19,16 @@ function tryWord(word) {
 function askAword() {
   var ws = new WebSocket('ws://localhost:8080')
   ws.onopen = function(e) {
-    let positiveWords = ['']
-    let negativeWords = ['']
+    let positiveWords = []
+    let negativeWords = []
     const tmp = JSON.parse(localStorage.getItem("guesses"))
     for (let i = 0; tmp && i < tmp.length; i += 1) {
       if (tmp[i][3] == null) {
-        if (negativeWords[0] == '') {
-          negativeWords = [tmp[i][0]]
-        } else if (negativeWords.indexOf(tmp[i][0]) == -1) {
+        if (negativeWords.indexOf(tmp[i][0]) == -1) {
           negativeWords.push(tmp[i][0])
         }
       } else {
-        if (positiveWords[0] == '') {
-          positiveWords = [tmp[i][0]]
-        } else if (positiveWords.indexOf(tmp[i][0]) == -1) {
+        if (positiveWords.indexOf(tmp[i][0]) == -1) {
           positiveWords.push(tmp[i][0])
         }
       }
