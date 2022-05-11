@@ -9,6 +9,14 @@ function sleep(delay) {
   return new Promise(resolve => setTimeout(resolve, delay))
 }
 
+function myMeanCalc(arr) {
+  return mean = arr.reduce((acc, val) => acc + val, 0) / arr.length
+}
+
+function standardDeviation(arr, usePopulation = false) {
+  return Math.sqrt(arr.reduce((acc, val) => acc.concat((val - myMeanCalc(arr)) ** 2), []).reduce((acc, val) => acc + val, 0) / (arr.length - (usePopulation ? 0 : 1)))
+}
+
 function tryWord(word) {
   if (word.indexOf(' ') == -1 && word.length > 1) {
     document.getElementById("form").guess.value = word
@@ -21,17 +29,39 @@ function askAword() {
   ws.onopen = function(e) {
     let positiveWords = []
     let negativeWords = []
+    let negThreshold = 15.0
     const tmp = JSON.parse(localStorage.getItem("guesses"))
-    for (let i = 0; tmp && i < tmp.length; i += 1) {
-      if (tmp[i][3] == null) {
-        if (negativeWords.indexOf(tmp[i][0]) == -1) {
-          negativeWords.push(tmp[i][0])
-        }
-      } else {
-        if (positiveWords.indexOf(tmp[i][0]) == -1) {
-          positiveWords.push(tmp[i][0])
+    if (tmp) {
+      let myMean = 0.0
+      let sDevArray = []
+      for (let i = 0; i < tmp.length; i++) {
+        if (tmp[i][3])
+          sDevArray.push(tmp[i][3])
+      }
+      if (sDevArray.length > 5)
+        negThreshold = 0.0
+      else if (sDevArray.length > 2)
+        negThreshold = 12.0
+      if (sDevArray.length > 5){
+        myMean = myMeanCalc(sDevArray)
+      }
+      sDevArray = []
+      for (let i = 0; i < tmp.length; i++) {
+        if (tmp[i][3] == null)
+          sDevArray.push(tmp[i][2])
+      }
+      for (let i = 0; i < tmp.length; i++) {
+        if (tmp[i][3] == null && tmp[i][2] < negThreshold) {
+          if (negativeWords.indexOf(tmp[i][0]) == -1) {
+            negativeWords.push(tmp[i][0])
+          }
+        } else if (tmp[i][3] && tmp[i][3] > myMean) {
+          if (positiveWords.indexOf(tmp[i][0]) == -1) {
+            positiveWords.push(tmp[i][0])
+          }
         }
       }
+      negativeWords = negativeWords.reverse()
     }
     if (previous_request == positiveWords.toString() + '0' + negativeWords.toString()) {
       indexWords++
