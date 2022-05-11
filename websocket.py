@@ -1,27 +1,36 @@
-import websockets
 import asyncio
+import websockets
+import random
 from gensim.models import KeyedVectors
+
+sentWords = []
 
 async def websocket_request_handler(websocket, path):
     client_data = await websocket.recv()
     print('<- ' + client_data)
     tmp = client_data.split("0")
-    response_data = ''
-    if len(tmp) == 3:
-        posTmp = tmp[0].split(",")
-        negTmp = tmp[1].split(",")
-        indexTmp = int("0" + tmp[2])
+    posTmp = tmp[0].split(",")
+    negTmp = tmp[1].split(",")
+    indexTmp = int("0" + tmp[2])
+    if len(tmp) != 3:
+        response_data = random.sample(model.index_to_key, 1)[0]
+    while len(tmp) == 3:
+        response_data = ''
+        if "" in posTmp:
+            posTmp.remove("")
+        if "" in negTmp:
+            negTmp.remove("")
         if indexTmp <= 0:
             indexTmp = 1
-        if len(tmp[0]) > 0 and len(posTmp) > 0:
-            if len(tmp[1]) > 0 and len(negTmp) > 0:
-                response_data = model.most_similar(positive=posTmp, negative=negTmp, topn=indexTmp)[indexTmp-1][0]
-            else:
-                response_data = model.most_similar(positive=posTmp, topn=indexTmp)[indexTmp-1][0]
-        elif len(tmp[1]) > 0 and len(negTmp) > 0:
-            response_data = model.most_similar(negative=negTmp, topn=indexTmp)[indexTmp-1][0]
-    if len(response_data) == 0:
-        response_data = model.most_similar(negative=['c'], topn=1)[0][0]
+        if len(posTmp) > 0 or len(negTmp) > 0:
+            response_data = model.most_similar(positive=posTmp, negative=negTmp, topn=indexTmp)[indexTmp-1][0]
+        else:
+            response_data = random.sample(model.index_to_key, 1)[0]
+        if response_data not in sentWords:
+            sentWords.append(response_data)
+            break
+        else:
+            indexTmp += 1
     print('=> ' + response_data)
     await websocket.send(response_data)
 

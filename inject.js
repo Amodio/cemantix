@@ -1,4 +1,4 @@
-const myTimeout = 150
+const myTimeout = 200
 const processingStr = '<span class="button__text">Processing...</span>'
 const jokerStr = '<span class="button__text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joker!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
 const bingoStr = '<span class="button__text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BINGO!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
@@ -10,11 +10,7 @@ function sleep(delay) {
 }
 
 function myMeanCalc(arr) {
-  return mean = arr.reduce((acc, val) => acc + val, 0) / arr.length
-}
-
-function standardDeviation(arr, usePopulation = false) {
-  return Math.sqrt(arr.reduce((acc, val) => acc.concat((val - myMeanCalc(arr)) ** 2), []).reduce((acc, val) => acc + val, 0) / (arr.length - (usePopulation ? 0 : 1)))
+  return arr.reduce((acc, val) => acc + val, 0) / arr.length
 }
 
 function tryWord(word) {
@@ -29,33 +25,35 @@ function askAword() {
   ws.onopen = function(e) {
     let positiveWords = []
     let negativeWords = []
-    let negThreshold = 15.0
+    let negThreshold = 17.0
     const tmp = JSON.parse(localStorage.getItem("guesses"))
     if (tmp) {
-      let myMean = 0.0
-      let sDevArray = []
+      let meanPos = 0.0
+      let tmpArray = []
       for (let i = 0; i < tmp.length; i++) {
         if (tmp[i][3])
-          sDevArray.push(tmp[i][3])
+          tmpArray.push(tmp[i][3])
       }
-      if (sDevArray.length > 5)
-        negThreshold = 0.0
-      else if (sDevArray.length > 2)
+      if (tmpArray.length > 5)
+        negThreshold = 10.0
+      else if (tmpArray.length > 2)
         negThreshold = 12.0
-      if (sDevArray.length > 5){
-        myMean = myMeanCalc(sDevArray)
+      if (tmpArray.length > 5){
+        meanPos = myMeanCalc(tmpArray)
       }
-      sDevArray = []
+      let meanNeg = 0.0
+      tmpArray = []
       for (let i = 0; i < tmp.length; i++) {
         if (tmp[i][3] == null)
-          sDevArray.push(tmp[i][2])
+          tmpArray.push(tmp[i][2])
       }
+      meanNeg = myMeanCalc(tmpArray)
       for (let i = 0; i < tmp.length; i++) {
-        if (tmp[i][3] == null && tmp[i][2] < negThreshold) {
+        if (tmp[i][3] == null && tmp[i][2] < meanNeg) {
           if (negativeWords.indexOf(tmp[i][0]) == -1) {
             negativeWords.push(tmp[i][0])
           }
-        } else if (tmp[i][3] && tmp[i][3] > myMean) {
+        } else if (tmp[i][3] && tmp[i][3] > meanPos) {
           if (positiveWords.indexOf(tmp[i][0]) == -1) {
             positiveWords.push(tmp[i][0])
           }
@@ -72,7 +70,6 @@ function askAword() {
     ws.send(previous_request + '0' + indexWords)
   }
   ws.onmessage = function(e) {
-    //console.log('got:', e)
     tryWord(e.data)
   }
   ws.onerror = function(e) {
@@ -120,6 +117,8 @@ function addButton() {
   const tmp = JSON.parse(localStorage.getItem("guesses"))
   if (tmp && tmp[0][3] == 1000)
     element.innerHTML = bingoStr
+  else
+    loadPythonModel()
 }
 injectCSS()
 addButton()
