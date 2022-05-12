@@ -14,6 +14,6 @@ Bot for a web game where you have to guess a word each day.
 ## Notes
 ![Model Benchmarking](images/model_benchmark.png?raw=true "Model Benchmarking")
 
-As you can see, results are far from perfect!
+As you can see, results are far from being perfect!
 
 I have tested _57759_ valid words, some do not exist and the proposed models do not contain all of them...
