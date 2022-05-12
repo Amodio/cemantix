@@ -1,6 +1,5 @@
 import asyncio
 import websockets
-import random
 from gensim.models import KeyedVectors
 
 async def websocket_request_handler(websocket, path):
@@ -33,7 +32,7 @@ async def websocket_request_handler(websocket, path):
         if len(posTmp) > 0 or len(negTmp) > 0:
             response_data = model.most_similar(positive=posTmp, negative=negTmp, topn=websocket_request_handler.wordIndex)[websocket_request_handler.wordIndex-1][0]
         else:
-            response_data = random.sample(model.index_to_key, 1)[0]
+            response_data = model.index_to_key[1337]
         if response_data and response_data not in websocket_request_handler.sentWords:
             websocket_request_handler.sentWords.append(response_data)
             break
