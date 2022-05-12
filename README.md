@@ -16,8 +16,17 @@ Bot for a web game where you have to guess a word each day.
 
 As you can see, results are far from being perfect!
 
-I have tested _57759_ [valid words](goTestWords/wordlist.txt "valid words"), some do not exist in French and the proposed models do not contain all of them...
-
+I have tested _57759_ [valid words](goTestWords/wordlist.txt "valid words") for this game, some do not exist in French and the proposed models do not contain all of them:
+```
+$ wc -l missing_frWac_no*
+ 21332 missing_frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.txt
+ 18535 missing_frWac_no_postag_no_phrase_500_cbow_cut100.txt
+ 39867 total
+$ wc -l frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.txt frWac_no_postag_no_phrase_500_cbow_cut100.txt
+    36428 frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.txt
+    39225 frWac_no_postag_no_phrase_500_cbow_cut100.txt
+    75653 total
+```
 Nevertheless it works pretty well as this, even if a better model would be salutary.
 
 TODO: Execute the python part inside the browser, see: https://github.com/pyodide/pyodide/issues/2545
