@@ -19,3 +19,5 @@ As you can see, results are far from being perfect!
 I have tested _57759_ [valid words](goTestWords/wordlist.txt "valid words"), some do not exist in French and the proposed models do not contain all of them...
 
 Nevertheless it works pretty well as this, even if a better model would be salutary.
+
+TODO: Execute the python part inside the browser, see: https://github.com/pyodide/pyodide/issues/2545
