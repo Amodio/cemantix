@@ -1,4 +1,4 @@
-const myTimeout = 200
+const myTimeout = 300
 const processingStr = '<span class="button__text">Processing...</span>'
 const jokerStr = '<span class="button__text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joker!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
 const bingoStr = '<span class="button__text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BINGO!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
@@ -25,7 +25,6 @@ function askAword() {
   ws.onopen = function(e) {
     let positiveWords = []
     let negativeWords = []
-    let negThreshold = 17.0
     const tmp = JSON.parse(localStorage.getItem("guesses"))
     if (tmp) {
       let meanPos = 0.0
@@ -34,10 +33,6 @@ function askAword() {
         if (tmp[i][3])
           tmpArray.push(tmp[i][3])
       }
-      if (tmpArray.length > 5)
-        negThreshold = 10.0
-      else if (tmpArray.length > 2)
-        negThreshold = 12.0
       if (tmpArray.length > 5){
         meanPos = myMeanCalc(tmpArray)
       }
