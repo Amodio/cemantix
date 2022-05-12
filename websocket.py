@@ -18,6 +18,10 @@ async def websocket_request_handler(websocket, path):
         panic("parse error")
     posTmp = tmp[0].split(",")
     negTmp = tmp[1].split(",")
+    if "" in posTmp:
+        posTmp.remove("")
+    if "" in negTmp:
+        negTmp.remove("")
     if prev_client_data == client_data:
         wordIndex += 1
     else:
@@ -27,15 +31,11 @@ async def websocket_request_handler(websocket, path):
         wordIndex = 1
     while len(tmp) == 2:
         response_data = ''
-        if "" in posTmp:
-            posTmp.remove("")
-        if "" in negTmp:
-            negTmp.remove("")
         if len(posTmp) > 0 or len(negTmp) > 0:
             response_data = model.most_similar(positive=posTmp, negative=negTmp, topn=wordIndex)[wordIndex-1][0]
         else:
             response_data = random.sample(model.index_to_key, 1)[0]
-        if response_data not in sentWords:
+        if not response_data or response_data not in sentWords:
             sentWords.append(response_data)
             break
         else:
