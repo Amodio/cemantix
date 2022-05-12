@@ -14,6 +14,8 @@ async def websocket_request_handler(websocket, path):
     indexTmp = int("0" + tmp[2])
     if len(tmp) != 3:
         response_data = random.sample(model.index_to_key, 1)[0]
+        if response_data not in sentWords:
+            sentWords.append(response_data)
     while len(tmp) == 3:
         response_data = ''
         if "" in posTmp:
