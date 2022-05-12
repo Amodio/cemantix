@@ -17,3 +17,5 @@ Bot for a web game where you have to guess a word each day.
 As you can see, results are far from being perfect!
 
 I have tested _57759_ [valid words](goTestWords/wordlist.txt "valid words"), some do not exist in French and the proposed models do not contain all of them...
+
+Nevertheless it works pretty well as this, even if a better model would be salutary.
