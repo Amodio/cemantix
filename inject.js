@@ -1,4 +1,4 @@
-const myTimeout = 300
+const myTimeout = 250
 const processingStr = '<span class="button__text">Processing...</span>'
 const jokerStr = '<span class="button__text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joker!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
 const bingoStr = '<span class="button__text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BINGO!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
@@ -14,7 +14,7 @@ function myMeanCalc(arr) {
 }
 
 function tryWord(word) {
-  if (word.indexOf(' ') == -1 && word.length > 1) {
+  if (word.indexOf(' ') == -1 && word.length > 1 && document.getElementById("button3").innerHTML == processingStr) {
     document.getElementById("form").guess.value = word
     document.getElementById("guess-btn").click()
   }
