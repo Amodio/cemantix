@@ -1,9 +1,7 @@
-const myTimeout = 400
+const myTimeout = 500
 const processingStr = '<span class="button__text">Processing...</span>'
 const jokerStr = '<span class="button__text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Joker!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
 const bingoStr = '<span class="button__text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BINGO!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>'
-let indexWords = 1
-let previous_request = ''
 
 function sleep(delay) {
   return new Promise(resolve => setTimeout(resolve, delay))
@@ -56,13 +54,7 @@ function askAword() {
       }
       negativeWords = negativeWords.reverse()
     }
-    if (previous_request == positiveWords.toString() + '0' + negativeWords.toString()) {
-      indexWords++
-    } else {
-      indexWords = 1
-      previous_request = positiveWords.toString() + '0' + negativeWords.toString()
-    }
-    ws.send(previous_request + '0' + indexWords)
+    ws.send(positiveWords.toString() + '_' + negativeWords.toString())
   }
   ws.onmessage = function(e) {
     tryWord(e.data)
