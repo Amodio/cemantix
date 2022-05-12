@@ -4,11 +4,11 @@ from gensim.models import KeyedVectors
 
 async def websocket_request_handler(websocket, path):
     if not hasattr(websocket_request_handler, "sentWords"):
-        setattr(websocket_request_handler, "sentWords", [])
+        websocket_request_handler.sentWords = []
     if not hasattr(websocket_request_handler, "wordIndex"):
-        setattr(websocket_request_handler, "wordIndex", 1)
+        websocket_request_handler.wordIndex = 1
     if not hasattr(websocket_request_handler, "prev_client_data"):
-        setattr(websocket_request_handler, "prev_client_data", '')
+        websocket_request_handler.prev_client_data = ''
     client_data = await websocket.recv()
     print('<- ' + client_data)
     tmp = client_data.split("_")
@@ -21,18 +21,18 @@ async def websocket_request_handler(websocket, path):
     if "" in negTmp:
         negTmp.remove("")
     if websocket_request_handler.prev_client_data == client_data:
-        setattr(websocket_request_handler, "wordIndex", websocket_request_handler.wordIndex + 1)
+        websocket_request_handler.wordIndex += 1
     else:
         websocket_request_handler.wordIndex = 1
-        setattr(websocket_request_handler, "prev_client_data", client_data)
+        websocket_request_handler.prev_client_data = client_data
     if websocket_request_handler.wordIndex <= 0:
-        setattr(websocket_request_handler, "wordIndex", 1)
+        websocket_request_handler.wordIndex = 1
     while len(tmp) == 2:
         response_data = ''
         if len(posTmp) > 0 or len(negTmp) > 0:
             response_data = model.most_similar(positive=posTmp, negative=negTmp, topn=websocket_request_handler.wordIndex)[websocket_request_handler.wordIndex-1][0]
         else:
-            response_data = model.index_to_key[1337]
+            response_data = model.index_to_key[1337 + websocket_request_handler.wordIndex - 1]
         if response_data and response_data not in websocket_request_handler.sentWords:
             websocket_request_handler.sentWords.append(response_data)
             break
