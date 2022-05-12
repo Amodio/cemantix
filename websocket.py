@@ -3,14 +3,13 @@ import websockets
 import random
 from gensim.models import KeyedVectors
 
-sentWords = []
-wordIndex = 1
-prev_client_data = ''
-
 async def websocket_request_handler(websocket, path):
-    global sentWords
-    global wordIndex
-    global prev_client_data
+    if not hasattr(websocket_request_handler, "sentWords"):
+        setattr(websocket_request_handler, "sentWords", [])
+    if not hasattr(websocket_request_handler, "wordIndex"):
+        setattr(websocket_request_handler, "wordIndex", 1)
+    if not hasattr(websocket_request_handler, "prev_client_data"):
+        setattr(websocket_request_handler, "prev_client_data", '')
     client_data = await websocket.recv()
     print('<- ' + client_data)
     tmp = client_data.split("_")
@@ -22,24 +21,24 @@ async def websocket_request_handler(websocket, path):
         posTmp.remove("")
     if "" in negTmp:
         negTmp.remove("")
-    if prev_client_data == client_data:
-        wordIndex += 1
+    if websocket_request_handler.prev_client_data == client_data:
+        setattr(websocket_request_handler, "wordIndex", websocket_request_handler.wordIndex + 1)
     else:
-        wordIndex = 1
-        prev_client_data = client_data
-    if wordIndex <= 0:
-        wordIndex = 1
+        websocket_request_handler.wordIndex = 1
+        setattr(websocket_request_handler, "prev_client_data", client_data)
+    if websocket_request_handler.wordIndex <= 0:
+        setattr(websocket_request_handler, "wordIndex", 1)
     while len(tmp) == 2:
         response_data = ''
         if len(posTmp) > 0 or len(negTmp) > 0:
-            response_data = model.most_similar(positive=posTmp, negative=negTmp, topn=wordIndex)[wordIndex-1][0]
+            response_data = model.most_similar(positive=posTmp, negative=negTmp, topn=websocket_request_handler.wordIndex)[websocket_request_handler.wordIndex-1][0]
         else:
             response_data = random.sample(model.index_to_key, 1)[0]
-        if not response_data or response_data not in sentWords:
-            sentWords.append(response_data)
+        if response_data and response_data not in websocket_request_handler.sentWords:
+            websocket_request_handler.sentWords.append(response_data)
             break
         else:
-            wordIndex += 1
+            websocket_request_handler.wordIndex += 1
     print('=> ' + response_data)
     await websocket.send(response_data)
 
