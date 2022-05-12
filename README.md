@@ -27,6 +27,6 @@ $ wc -l frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.txt frWac_no_postag_no
     39225 frWac_no_postag_no_phrase_500_cbow_cut100.txt
     75653 total
 ```
-Nevertheless it works pretty well as this, even if a better model would be salutary.
+Nevertheless it works pretty well as this for now, even if a better model (= with all of the valid words found) would be salutary.
 
 TODO: Execute the python part inside the browser, see: https://github.com/pyodide/pyodide/issues/2545
