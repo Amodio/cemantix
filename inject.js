@@ -31,16 +31,17 @@ function askAword() {
         if (tmp[i][3])
           tmpArray.push(tmp[i][3])
       }
+      let meanNeg = 18.0
       if (tmpArray.length > 5){
         meanPos = myMeanCalc(tmpArray)
+      } else {
+        tmpArray = []
+        for (let i = 0; i < tmp.length; i++) {
+          if (tmp[i][3] == null)
+            tmpArray.push(tmp[i][2])
+        }
+        meanNeg = myMeanCalc(tmpArray)
       }
-      let meanNeg = 0.0
-      tmpArray = []
-      for (let i = 0; i < tmp.length; i++) {
-        if (tmp[i][3] == null)
-          tmpArray.push(tmp[i][2])
-      }
-      meanNeg = myMeanCalc(tmpArray)
       for (let i = 0; i < tmp.length; i++) {
         if (tmp[i][3] == null && tmp[i][2] < meanNeg) {
           if (negativeWords.indexOf(tmp[i][0]) == -1) {
