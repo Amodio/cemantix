@@ -43,7 +43,7 @@ function askAword() {
         meanNeg = myMeanCalc(tmpArray)
       }
       for (let i = 0; i < tmp.length; i++) {
-        if (tmp[i][3] == null && tmp[i][2] < meanNeg) {
+        if (tmp[i][3] == null && tmp[i][2] <= meanNeg) {
           if (negativeWords.indexOf(tmp[i][0]) == -1) {
             negativeWords.push(tmp[i][0])
           }
