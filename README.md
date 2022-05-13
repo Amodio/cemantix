@@ -10,6 +10,7 @@ Bot for a web game where you have to guess a word each day.
 ![Joker button](images/joker_btn.png?raw=true "Joker button")
 ![Joker running](images/joker_processing.png?raw=true "Joker running")
 ![Run example](images/run.png?raw=true "Run example")
+![Run example 2](images/run2.png?raw=true "Run example2")
 
 ## Notes
 ![Model Benchmarking](images/model_benchmark.png?raw=true "Model Benchmarking")
