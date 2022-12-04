@@ -11,10 +11,12 @@ function myMeanCalc(arr) {
   return arr.reduce((acc, val) => acc + val, 0) / arr.length
 }
 
-function tryWord(word) {
+async function tryWord(word) {
   if (word.indexOf(' ') == -1 && word.length > 1) {
-    document.getElementById("form").guess.value = word
-    document.getElementById("guess-btn").click()
+    document.getElementById("cemantix-form")[0].value = word
+    while(document.getElementById("cemantix-guess").disabled) await sleep(myTimeout)
+    document.getElementById("cemantix-guess-btn").click()
+    await sleep(myTimeout)
   }
 }
 
@@ -23,13 +25,17 @@ function askAword() {
   ws.onopen = function(e) {
     let positiveWords = []
     let negativeWords = []
-    const tmp = JSON.parse(localStorage.getItem("guesses"))
+    const data = JSON.parse(localStorage.getItem("guesses"))
+    if(data==null) {ws.send('_');return;}
+    const tmp = Object.keys(data).map(function(key) {
+      return [key, data[key]];
+    }).sort((a, b) => b[1][1][0] - a[1][1][0]);
     if (tmp) {
       let meanPos = 0.0
       let tmpArray = []
       for (let i = 0; i < tmp.length; i++) {
-        if (tmp[i][3])
-          tmpArray.push(tmp[i][3])
+        if (tmp[i][1][1][1])
+          tmpArray.push(tmp[i][1][1][1])
       }
       let meanNeg = 18.0
       if (tmpArray.length > 5){
@@ -37,17 +43,17 @@ function askAword() {
       } else {
         tmpArray = []
         for (let i = 0; i < tmp.length; i++) {
-          if (tmp[i][3] == null)
-            tmpArray.push(tmp[i][2])
+          if (tmp[i][1][1][1] == null)
+            tmpArray.push(tmp[i][1][1][0])
         }
         meanNeg = myMeanCalc(tmpArray)
       }
       for (let i = 0; i < tmp.length; i++) {
-        if (tmp[i][3] == null && tmp[i][2] <= meanNeg) {
+        if (tmp[i][1][1][1] == null && tmp[i][1][1][0] <= meanNeg) {
           if (negativeWords.indexOf(tmp[i][0]) == -1) {
             negativeWords.push(tmp[i][0])
           }
-        } else if (tmp[i][3] && tmp[i][3] > meanPos) {
+        } else if (tmp[i][1][1][1] && tmp[i][1][1][1] > meanPos) {
           if (positiveWords.indexOf(tmp[i][0]) == -1) {
             positiveWords.push(tmp[i][0])
           }
@@ -66,14 +72,19 @@ function askAword() {
 }
 
 async function jokerTime() {
+  
   while (document.getElementById("button3").innerHTML == processingStr) {
-    const tmp = JSON.parse(localStorage.getItem("guesses"))
-    if (tmp && tmp[0][3] == 1000) {
-      document.getElementById("button3").innerHTML = bingoStr
-      document.getElementById("button3").classList.toggle("button--loading")
-    } else {
+    if (document.getElementsByClassName('number close') && document.getElementsByClassName('number close').length > 0) {
+        if (document.getElementsByClassName('number close')[1].innerText == 1000) {
+          document.getElementById("button3").innerHTML = bingoStr
+        document.getElementById("button3").classList.toggle("button--loading")
+      } else {
+        askAword()
+        await sleep(myTimeout)
+      }
+    }else {
       askAword()
-      await sleep(myTimeout)
+        await sleep(myTimeout)
     }
   }
 }
@@ -97,16 +108,17 @@ function injectCSS() {
 }
 
 function addButton() {
-  document.getElementById("form").insertAdjacentHTML('beforebegin', '<button id="button3">' + jokerStr + '</button>')
+  document.getElementById("cemantix-form").insertAdjacentHTML('beforebegin', '<button id="button3">' + jokerStr + '</button>')
   const element = document.getElementById("button3")
   element.addEventListener("click", () => {
     toggleButton()
   })
-  const tmp = JSON.parse(localStorage.getItem("guesses"))
-  if (tmp && tmp[0][3] == 1000)
-    element.innerHTML = bingoStr
-  else
-    loadPythonModel()
+    if (document.getElementsByClassName('number close').length > 0) {
+      if (document.getElementsByClassName('number close')[1].innerText == 1000)
+        element.innerHTML = bingoStr
+  //  else
+      //loadPythonModel()
+  }
 }
 injectCSS()
 addButton()
