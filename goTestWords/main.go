@@ -14,7 +14,7 @@ const unknownStr = "{\"error\":"
 const unknownErr = "{\"error\":\"Je ne connais pas "
 
 func sendWord(word string) string {
-    resp, err := http.PostForm("https://cemantix.herokuapp.com/score",
+    resp, err := http.PostForm("https://cemantix.certitudes.org/score",
                                 url.Values{ "word": {word} })
     if err != nil {
         log.Fatal(word, err, resp)
