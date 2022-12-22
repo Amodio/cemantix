@@ -56,5 +56,5 @@ func checkWords(pathname string) {
 }
 
 func main() {
-    checkWords("wordlist.txt")
+    checkWords("../wordlist.txt")
 }
