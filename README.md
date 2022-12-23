@@ -30,7 +30,7 @@ $ wc -l frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.txt frWac_no_postag_no
     39225 frWac_no_postag_no_phrase_500_cbow_cut100.txt
     75653 total
 ```
-Nevertheless it works pretty well as this for now, even if a better model (= with all of the valid words found) would be salutary.
+Nevertheless it works pretty well as this.
 
 Check [benchmark.txt](https://raw.githubusercontent.com/Amodio/cemantix/main/benchmark/benchmark.txt) to see how good our models are from what the website is using.
 
