@@ -7,10 +7,10 @@ Bot for a web game where you have to guess a word each day.
 * Load [inject.js](inject.js?raw=true "inject.js") into your console (F12) or preferably in the Chrome extension [Custom JavaScript for Websites 2](https://chrome.google.com/webstore/detail/custom-javascript-for-web/ddbjnfjiigjmcpcpkmhogomapikjbjdk "Custom JavaScript for Websites 2")
 * Click the 'Joker!' button and enjoy!
 
-![Joker button](images/joker_btn.png?raw=true "Joker button")
-![Joker running](images/joker_processing.png?raw=true "Joker running")
-![Run example](images/run.png?raw=true "Run example")
-![Run example 2](images/run2.png?raw=true "Run example2")
+![Joker button](https://raw.githubusercontent.com/Amodio/cemantix/main/images/joker_btn.png "Joker button")
+![Joker running](https://raw.githubusercontent.com/Amodio/cemantix/main/images/joker_processing.png "Joker running")
+![Run example](https://raw.githubusercontent.com/Amodio/cemantix/main/images/run.png "Run example")
+![Run example 2](https://raw.githubusercontent.com/Amodio/cemantix/main/images/run2.png "Run example2")
 
 ## Notes
 ![Model Benchmarking](images/model_benchmark.png?raw=true "Model Benchmarking")
