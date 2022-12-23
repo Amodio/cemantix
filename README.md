@@ -14,6 +14,7 @@ injectScript('https://raw.githubusercontent.com/Amodio/cemantix/main/index.js')
 * Click the 'Joker!' button and enjoy!
 
 ![Joker button](https://raw.githubusercontent.com/Amodio/cemantix/main/images/joker_btn.png "Joker button")
+
 ![First](https://raw.githubusercontent.com/Amodio/cemantix/main/images/1st_17tries.png "First")
 
 ## Notes
@@ -30,8 +31,6 @@ $ wc -l frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.txt frWac_no_postag_no
     39225 frWac_no_postag_no_phrase_500_cbow_cut100.txt
     75653 total
 ```
-Nevertheless it works pretty well as this.
-
-Check [benchmark.txt](https://raw.githubusercontent.com/Amodio/cemantix/main/benchmark/benchmark.txt) to see how good our models are from what the website is using.
+Nevertheless it works pretty well. Check [benchmark.txt](https://raw.githubusercontent.com/Amodio/cemantix/main/benchmark/benchmark.txt) to see how good our models are from what the website is using.
 
 TODO: cemantle (US)?
