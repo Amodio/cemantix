@@ -1,4 +1,5 @@
 benchmark/results/*
+!benchmark/results/.gitkeep
 models/frWac_no_postag_no_phrase_700_skip_cut50_stripped.bin
 models/frWac_no_postag_no_phrase_500_skip_cut100_stripped.bin
 models/frWac_non_lem_no_postag_no_phrase_500_skip_cut100_stripped.bin
