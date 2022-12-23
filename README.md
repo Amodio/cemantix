@@ -1,23 +1,25 @@
 # cemantix
 Bot for a web game where you have to guess a word each day.
 
-* Fetch this [word2vec model](frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.bin?raw=true "word2vec model") (29 MB, cleansed from [the creator of the game](https://fauconnier.github.io/#data "the creator of the game"))
-* Run [websocket.py](websocket.py?raw=true "websocket.py") from the same directory (requires: `pip install gensim`)
 * Go to https://cemantix.certitudes.org
-* Load [inject.js](inject.js?raw=true "inject.js") into your console (F12) or preferably in the Chrome extension [Custom JavaScript for Websites 2](https://chrome.google.com/webstore/detail/custom-javascript-for-web/ddbjnfjiigjmcpcpkmhogomapikjbjdk "Custom JavaScript for Websites 2")
+* Load [inject.js](https://raw.githubusercontent.com/Amodio/cemantix/main/inject.js "inject.js") using the Chrome extension [Custom JavaScript for Websites 2](https://chrome.google.com/webstore/detail/custom-javascript-for-web/ddbjnfjiigjmcpcpkmhogomapikjbjdk "Custom JavaScript for Websites 2") or manually into your console (F12):
+```
+function injectScript(src){
+  var script = document.createElement('script');
+  script.src = src;
+  document.head.appendChild(script);
+}
+injectScript('https://raw.githubusercontent.com/Amodio/cemantix/main/index.js')
+```
 * Click the 'Joker!' button and enjoy!
 
 ![Joker button](https://raw.githubusercontent.com/Amodio/cemantix/main/images/joker_btn.png "Joker button")
-![Joker running](https://raw.githubusercontent.com/Amodio/cemantix/main/images/joker_processing.png "Joker running")
-![Run example](https://raw.githubusercontent.com/Amodio/cemantix/main/images/run.png "Run example")
-![Run example 2](https://raw.githubusercontent.com/Amodio/cemantix/main/images/run2.png "Run example2")
+![First](https://raw.githubusercontent.com/Amodio/cemantix/main/images/1st_17tries.png "First")
 
 ## Notes
-![Model Benchmarking](images/model_benchmark.png?raw=true "Model Benchmarking")
+Models from [Jean-Philippe Fauconnier](https://fauconnier.github.io).
 
-As you can see, results are far from being perfect!
-
-I have tested _57759_ [valid words](goTestWords/wordlist.txt "valid words") for this game, some do not exist in French and the proposed models do not contain all of them:
+I have tested _57759_ [valid words](https://raw.githubusercontent.com/Amodio/cemantix/main/wordlist.txt "valid words") for this game, some do not exist in French and the proposed models do not contain all of them:
 ```
 $ wc -l missing_frWac_no*
  21332 missing_frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.txt
@@ -30,4 +32,4 @@ $ wc -l frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.txt frWac_no_postag_no
 ```
 Nevertheless it works pretty well as this for now, even if a better model (= with all of the valid words found) would be salutary.
 
-TODO: Execute the python part inside the browser, see: https://github.com/pyodide/pyodide/issues/2545
+TODO: cemantle (US)?
