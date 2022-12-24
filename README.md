@@ -9,7 +9,7 @@ function injectScript(src){
   script.src = src;
   document.head.appendChild(script);
 }
-injectScript('https://raw.githubusercontent.com/Amodio/cemantix/main/index.js')
+injectScript('https://raw.githubusercontent.com/Amodio/cemantix/main/inject.js')
 ```
 * Click the 'Joker!' button and enjoy!
 
