@@ -31,6 +31,6 @@ $ wc -l frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.txt frWac_no_postag_no
     39225 frWac_no_postag_no_phrase_500_cbow_cut100.txt
     75653 total
 ```
-Nevertheless it works pretty well. Check [benchmark.txt](https://raw.githubusercontent.com/Amodio/cemantix/main/benchmark/benchmark.txt) to see how good our models are from what the website is using.
+Nevertheless it works pretty well. Check [benchmark.txt](https://raw.githubusercontent.com/Amodio/cemantix/main/benchmark/benchmark.txt) to see how good our models are from what the website is using. We reach a correspondence of ~75% with the best of our models (stripped=containing only valid words).
 
 TODO: cemantle (US)?
