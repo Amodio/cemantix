@@ -20,21 +20,21 @@ for model_path in model_paths:
     model = KeyedVectors.load_word2vec_format(os.path.join('../models/', model_path), binary=True, unicode_errors='ignore')
     for word in words:
         results = model.most_similar(positive=[word], negative=[], topn=999)
-        with open(os.path.join('./results/', model_path + '_' + word), "w") as oFile:
+        with open(os.path.join('./results/', model_path + '_' + word), "w", encoding="utf-8") as oFile:
             for result in results:
                 oFile.write(result[0] + '\n')
 
 # Write how many words returned by the model (top 999) match the reference words
-with open('benchmark.txt', "w") as oFile:
+with open('benchmark.txt', "w", encoding="utf-8") as oFile:
     oFile.write('Words tested: ' + ' '.join(words) + '\n')
     means = []
     lines = []
     for model_path in model_paths:
         results = []
         for word in words:
-            with open(os.path.join('./references/', word), "r") as f:
+            with open(os.path.join('./references/', word), "r", encoding="utf-8") as f:
                 contentRef = f.read().splitlines()
-            with open(os.path.join('./results/', model_path + '_' + word), "r") as f:
+            with open(os.path.join('./results/', model_path + '_' + word), "r", encoding="utf-8") as f:
                 content = f.read().splitlines()
             result = 0
             for c in content:
