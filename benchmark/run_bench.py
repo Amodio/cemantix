@@ -44,7 +44,7 @@ with open('benchmark.txt', "w", encoding="utf-8") as oFile:
         mean = 0
         for res in results:
             mean += res
-        mean /= len(results) * 10
+        mean /= len(results) * 10 * 999 / 1000
         means.append(mean)
         lines.append(model_path + ' ' + get_file_size(os.path.join('../models/', model_path)) + ' ' + str(round(mean, 2)) + '% ' + ' '.join([str(i) for i in results]) + '\n')
     for line_index in reversed(sorted(range(len(means)),key=means.__getitem__)):
