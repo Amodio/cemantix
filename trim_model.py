@@ -27,7 +27,7 @@ if len(sys.argv[2]) <= len('.bin') or sys.argv[2][len(sys.argv[2]) - len('.bin')
 
 sName = sys.argv[2][:len(sys.argv[2]) - len('.bin')]
 os.system('~/convertvec bin2txt ' + sys.argv[2] + ' ' + sName + '.txt')
-with open(sName + '.txt', "r") as f:
+with open(sName + '.txt', "r", encoding="utf-8") as f:
     count = 0
     dimension = f.readline().split(' ')[1]
     with open(sName + '_stripped.txt', "w") as oFile:
