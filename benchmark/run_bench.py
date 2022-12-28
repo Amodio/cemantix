@@ -14,7 +14,8 @@ for path in os.listdir('./references/'):
 # Test each model
 model_paths=[]
 for path in os.listdir('../models/'):
-    model_paths.append(path)
+    if path.endswith('.bin'):
+        model_paths.append(path)
 
 for model_path in model_paths:
     model = KeyedVectors.load_word2vec_format(os.path.join('../models/', model_path), binary=True, unicode_errors='ignore')
