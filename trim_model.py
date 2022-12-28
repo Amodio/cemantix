@@ -2,7 +2,7 @@ import os
 import sys
 
 def valid_word(word, file_path):
-    with open(file_path, "r") as iFile:
+    with open(file_path, 'r') as iFile:
         contentRef = iFile.read().splitlines()
         if word in contentRef:
             return True
@@ -27,10 +27,10 @@ if len(sys.argv[2]) <= len('.bin') or sys.argv[2][len(sys.argv[2]) - len('.bin')
 
 sName = sys.argv[2][:len(sys.argv[2]) - len('.bin')]
 os.system('~/convertvec bin2txt ' + sys.argv[2] + ' ' + sName + '.txt')
-with open(sName + '.txt', "r", encoding="latin-1") as f:
+with open(sName + '.txt', 'r', encoding='utf-8', errors='replace') as f:
     count = 0
     dimension = f.readline().split(' ')[1]
-    with open(sName + '_stripped.txt', "w") as oFile:
+    with open(sName + '_stripped.txt', 'w') as oFile:
         #oFile.write(f.readline())
         for line in f:
             word = line.split(' ')[0]
@@ -38,7 +38,7 @@ with open(sName + '.txt', "r", encoding="latin-1") as f:
                 oFile.write(line)
                 count += 1
     # Prepend: lines&dimension (1st line)
-    with open(sName + '_stripped.txt', "r+") as oFile:
+    with open(sName + '_stripped.txt', 'r+') as oFile:
         file_text = oFile.read()
         oFile.seek(0)
         oFile.write(str(count) + ' ' + str(dimension) + file_text)
