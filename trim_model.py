@@ -12,9 +12,6 @@ if len(sys.argv) != 3:
     print("Usage:\t" + sys.argv[0] + " wordlist.txt model.bin\nwordlist.txt contains the list of valid words, model.bin is the model to strip.\nIt will output a model_stripped.bin file.", file=sys.stderr)
     sys.exit(1)
 
-if os.path.exists('/home/da/convertvec') == False:
-    print('Cannot find: ~/convertvec', file=sys.stderr)
-    sys.exit(1)
 if os.path.exists(sys.argv[1]) == False:
     print('Cannot find: ' + sys.argv[1], file=sys.stderr)
     sys.exit(1)
