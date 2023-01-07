@@ -2,14 +2,14 @@
 Bot for a web game where you have to guess a word each day (FR + EN).
 
 * Go to https://cemantix.certitudes.org or https://cemantle.certitudes.org
-* Load [inject.js](https://raw.githubusercontent.com/Amodio/cemantix/main/inject.js "inject.js") using the Chrome extension [Custom JavaScript for Websites 2](https://chrome.google.com/webstore/detail/custom-javascript-for-web/ddbjnfjiigjmcpcpkmhogomapikjbjdk "Custom JavaScript for Websites 2") or manually into your console (F12):
+* Load [inject.js](https://cdn.jsdelivr.net/gh/Amodio/cemantix/inject.js "inject.js") using the Chrome extension [Custom JavaScript for Websites 2](https://chrome.google.com/webstore/detail/custom-javascript-for-web/ddbjnfjiigjmcpcpkmhogomapikjbjdk "Custom JavaScript for Websites 2") or manually into your console (F12):
 ```
 function injectScript(src){
   var script = document.createElement('script');
   script.src = src;
   document.head.appendChild(script);
 }
-injectScript('https://raw.githubusercontent.com/Amodio/cemantix/main/inject.js')
+injectScript('https://cdn.jsdelivr.net/gh/Amodio/cemantix/inject.js')
 ```
 * Click the 'Joker!' button and enjoy!
 
