@@ -1,7 +1,7 @@
 # cemantix
-Bot for a web game where you have to guess a word each day.
+Bot for a web game where you have to guess a word each day (FR + EN).
 
-* Go to https://cemantix.certitudes.org
+* Go to https://cemantix.certitudes.org or https://cemantle.certitudes.org
 * Load [inject.js](https://raw.githubusercontent.com/Amodio/cemantix/main/inject.js "inject.js") using the Chrome extension [Custom JavaScript for Websites 2](https://chrome.google.com/webstore/detail/custom-javascript-for-web/ddbjnfjiigjmcpcpkmhogomapikjbjdk "Custom JavaScript for Websites 2") or manually into your console (F12):
 ```
 function injectScript(src){
@@ -18,19 +18,8 @@ injectScript('https://raw.githubusercontent.com/Amodio/cemantix/main/inject.js')
 ![First](https://raw.githubusercontent.com/Amodio/cemantix/main/images/1st_17tries.png "First")
 
 ## Notes
-Models from [Jean-Philippe Fauconnier](https://fauconnier.github.io).
+Models from [Jean-Philippe Fauconnier](https://fauconnier.github.io) and [Google](https://code.google.com/archive/p/word2vec/) (for Cemantle).
 
-I have tested _57759_ [valid words](https://raw.githubusercontent.com/Amodio/cemantix/main/wordlist.txt "valid words") for this game, some do not exist in French and the proposed models do not contain all of them:
-```
-$ wc -l missing_frWac_no*
- 21332 missing_frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.txt
- 18535 missing_frWac_no_postag_no_phrase_500_cbow_cut100.txt
- 39867 total
-$ wc -l frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.txt frWac_no_postag_no_phrase_500_cbow_cut100.txt
-    36428 frWac_non_lem_no_postag_no_phrase_200_cbow_cut100.txt
-    39225 frWac_no_postag_no_phrase_500_cbow_cut100.txt
-    75653 total
-```
-Nevertheless it works pretty well. Check [benchmark.txt](https://raw.githubusercontent.com/Amodio/cemantix/main/benchmark/benchmark.txt) to see how good our models are from what the website is using. We reach a correspondence of ~75% with the best of our models (stripped=containing only valid words).
+I have tested _55402_ [FR words](https://raw.githubusercontent.com/Amodio/cemantix/main/wordlist.txt "FR words") for this game even if some do not exist in French; _46212_ [EN words](https://raw.githubusercontent.com/Amodio/cemantix/main/wordlist.txt "EN words") for Cemantle. Check [benchmark.txt](https://raw.githubusercontent.com/Amodio/cemantix/main/benchmark/benchmark.txt) or [benchmark.txt](https://raw.githubusercontent.com/Amodio/cemantix/main/CEMANTLE/benchmark/benchmark.txt) (Cemantle) to see how similar our models are: ~97% for Cémantix and 100% for Cemantle.
 
-TODO: cemantle (US)?
+*TODO:* cache the fetched models and do not compress any model to load it quicker? (optimization) + why not 100% match for Cémantix (accents)?
