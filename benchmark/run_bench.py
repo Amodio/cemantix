@@ -14,7 +14,7 @@ for path in os.listdir('./references/'):
 # Test each model
 model_paths=[]
 for path in os.listdir('../models/'):
-    if path.endswith('.bin'):
+    if path.endswith('.bin') or path.endswith('.bin.gz'):
         model_paths.append(path)
 
 for model_path in model_paths:
