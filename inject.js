@@ -96,7 +96,7 @@ async function loadPythonModel() {
   await pyodide.loadPackage('gensim');
   console.timeEnd('loadPythonModel: load gensim pkg with Pyodide (~4s)');
   console.time('loadPythonModel: download');
-  const fetchUrl = (window.location.hostname.split('.')[0] == 'cemantix' ? 'https://raw.githubusercontent.com/Amodio/cemantix/main/models/frWac_no_postag_phrase_500_cbow_cut10_stripped.bin' : 'https://raw.githubusercontent.com/Amodio/cemantix/main/CEMANTLE/models/GoogleNews-vectors-negative300_stripped.bin');
+  const fetchUrl = (window.location.hostname.split('.')[0] == 'cemantix' ? 'https://media.githubusercontent.com/media/Amodio/cemantix/main/models/frWac_no_postag_phrase_500_cbow_cut10_stripped.bin' : 'https://raw.githubusercontent.com/Amodio/cemantix/main/CEMANTLE/models/GoogleNews-vectors-negative300_stripped.bin');
   response = await caches.open('cemanbot').then(function(cache) {
     return cache.match('model.bin').then(function(response) {
       if (response) {
