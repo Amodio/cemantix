@@ -1,7 +1,7 @@
 benchmark/results/*
 !benchmark/results/.gitkeep
 models/*
-!models/frWac_no_postag_phrase_500_cbow_cut10_stripped.bin.psd
+!models/frWac_no_postag_phrase_500_cbow_cut10_stripped.bin
 CEMANTLE/benchmark/results/*
 !CEMANTLE/benchmark/results/.gitkeep
 CEMANTLE/models/GoogleNews-vectors-negative300.bin
