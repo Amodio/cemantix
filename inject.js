@@ -90,29 +90,36 @@ function sleep(delay) {
   return new Promise(resolve => setTimeout(resolve, delay));
 }
 async function loadPythonModel() {
-  console.time('loadPythonModel total (~15s)');
+  console.time('loadPythonModel total (~10s)');
   console.time('loadPythonModel: load gensim pkg with Pyodide (~4s)');
   pyodide = await loadPyodide();
   await pyodide.loadPackage('gensim');
   console.timeEnd('loadPythonModel: load gensim pkg with Pyodide (~4s)');
-  console.time('loadPythonModel: download (~5s)');
-  const fetchUrl = (window.location.hostname.split('.')[0] == 'cemantix' ? 'https://raw.githubusercontent.com/Amodio/cemantix/main/models/frWac_no_postag_phrase_500_cbow_cut10_stripped.bin.gz' : 'https://raw.githubusercontent.com/Amodio/cemantix/main/CEMANTLE/models/GoogleNews-vectors-negative300_stripped.bin');
-  fetch(fetchUrl).then(async function(response) {
-    if (!response.ok) {
-      throw new Error("HTTP error, status = " + response.status);
-    }
-    document.getElementById("button3").innerHTML = waitStr2;
-    document.head.contents = await response.arrayBuffer();
-    console.timeEnd('loadPythonModel: download (~5s)');
-    console.time('loadPythonModel: load downloaded model (~6s)');
-    pyodide.runPython(`
+  console.time('loadPythonModel: download');
+  const fetchUrl = (window.location.hostname.split('.')[0] == 'cemantix' ? 'https://raw.githubusercontent.com/Amodio/cemantix/main/models/frWac_no_postag_phrase_500_cbow_cut10_stripped.bin' : 'https://raw.githubusercontent.com/Amodio/cemantix/main/CEMANTLE/models/GoogleNews-vectors-negative300_stripped.bin');
+  response = await caches.open('cemanbot').then(function(cache) {
+    return cache.match('model.bin').then(function(response) {
+      if (response) {
+        return response;
+      }
+      return fetch(fetchUrl).then(function(response) {
+        if (!response.ok) {
+          throw new Error("HTTP error, status = " + response.status);
+        }
+        cache.put('model.bin', response.clone());
+        return response;
+      });
+    });
+  });
+  document.getElementById("button3").innerHTML = waitStr2;
+  document.head.contents = await response.arrayBuffer();
+  console.timeEnd('loadPythonModel: download');
+  console.time('loadPythonModel: load downloaded model (~6s)');
+  pyodide.runPython(`
 import js
 from gensim.models import KeyedVectors
 
 model_name = '/model.bin'
-if js.window.location.hostname.split('.')[0] == 'cemantix':
-    model_name += '.gz'
-
 with open(model_name, 'wb') as fh:
     js.document.head.contents.to_file(fh)
 
@@ -120,13 +127,12 @@ model = KeyedVectors.load_word2vec_format(model_name, binary=True, unicode_error
 prev_client_data = ''
 sentWords = []
 `);
-    console.timeEnd('loadPythonModel: load downloaded model (~6s)');
-    delete(document.head.contents);
-    console.timeEnd('loadPythonModel total (~15s)');
-    document.getElementById("button3").innerHTML = jokerStr;
-    document.getElementById("button3").addEventListener("click", () => {
-      toggleButton();
-    });
+  console.timeEnd('loadPythonModel: load downloaded model (~6s)');
+  delete(document.head.contents);
+  console.timeEnd('loadPythonModel total (~10s)');
+  document.getElementById("button3").innerHTML = jokerStr;
+  document.getElementById("button3").addEventListener("click", () => {
+    toggleButton();
   });
 }
 function secondsToTime(e){
