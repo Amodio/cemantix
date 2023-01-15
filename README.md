@@ -11,7 +11,7 @@ function injectScript(src){
 }
 injectScript('https://cdn.jsdelivr.net/gh/Amodio/cemantix/inject.js')
 ```
-It takes about 10 sec to load (a bit more the first time, then the binary model is cached).
+It takes about 8 sec to load (a bit more the first time, then the binary model is cached).
 * Click the 'Joker!' button and enjoy!
 
 ![Joker button](https://raw.githubusercontent.com/Amodio/cemantix/main/images/joker_btn.png "Joker button")
