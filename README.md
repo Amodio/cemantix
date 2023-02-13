@@ -16,7 +16,9 @@ It takes about 6 sec to load (more at the first time to cache the binary model).
 
 ![Joker button](https://raw.githubusercontent.com/Amodio/cemantix/main/images/joker_btn.png "Joker button")
 
-![First](https://raw.githubusercontent.com/Amodio/cemantix/main/images/1st_17tries.png "First")
+![First](https://raw.githubusercontent.com/Amodio/cemantix/main/images/1st_17attempts.png "First")
+
+![Cemantle in 15 attempts](https://raw.githubusercontent.com/Amodio/cemantix/main/CEMANTLE/images/cemantle_15_attempts.png "Cemantle in 15 attempts")
 
 ## Notes
 Models from [Jean-Philippe Fauconnier](https://fauconnier.github.io) and [Google](https://code.google.com/archive/p/word2vec/) (for Cemantle).
