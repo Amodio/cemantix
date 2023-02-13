@@ -90,7 +90,7 @@ function sleep(delay) {
   return new Promise(resolve => setTimeout(resolve, delay));
 }
 async function loadPythonModel() {
-  console.time('loadPythonModel total (~8s)');
+  console.time('loadPythonModel total (~6s)');
   console.time('loadPythonModel: load gensim pkg with Pyodide (~3s)');
   pyodide = await loadPyodide();
   await pyodide.loadPackage('gensim');
@@ -114,7 +114,7 @@ async function loadPythonModel() {
   document.getElementById("button3").innerHTML = waitStr2;
   document.head.contents = await response.arrayBuffer();
   console.timeEnd('loadPythonModel: download');
-  console.time('loadPythonModel: load downloaded model (~5s)');
+  console.time('loadPythonModel: load downloaded model (~3s)');
   pyodide.runPython(`
 import js
 from gensim.models import KeyedVectors
@@ -127,9 +127,9 @@ model = KeyedVectors.load_word2vec_format(model_name, binary=True, unicode_error
 prev_client_data = ''
 sentWords = []
 `);
-  console.timeEnd('loadPythonModel: load downloaded model (~5s)');
+  console.timeEnd('loadPythonModel: load downloaded model (~3s)');
   delete(document.head.contents);
-  console.timeEnd('loadPythonModel total (~8s)');
+  console.timeEnd('loadPythonModel total (~6s)');
   document.getElementById("button3").innerHTML = jokerStr;
   document.getElementById("button3").addEventListener("click", () => {
     toggleButton();
