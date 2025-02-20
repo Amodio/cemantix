@@ -142,8 +142,8 @@ function secondsToTime(e){
   return m + 'm' + Math.floor(e % 60).toString().padStart(2, '0') + 's';
 }
 async function tryWord(word) {
-  const cemant_guess = (window.location.hostname.split('.')[0] == 'cemantix' ? 'cemantix-guess' : 'cemantle-guess');
-  const cemant_error = (window.location.hostname.split('.')[0] == 'cemantix' ? 'cemantix-error' : 'cemantle-error');
+  const cemant_guess = 'guess';
+  const cemant_error = 'error';
   if (word.indexOf(' ') == -1 && word.length > 1) {
     document.getElementById(cemant_guess).value = word;
     while (document.getElementById(cemant_guess).disabled)
@@ -208,7 +208,7 @@ function injectCSS() {
   document.getElementsByTagName("head")[0].appendChild(style);
 }
 async function addButton() {
-  const cemant_form = (window.location.hostname.split('.')[0] == 'cemantix' ? 'cemantix-form' : 'cemantle-form');
+  const cemant_form = 'form';
   if (document.getElementById(cemant_form) === null)
     return;
   if (localStorage.secret !== undefined) {
