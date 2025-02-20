@@ -221,4 +221,4 @@ async function addButton() {
 }
 var startTime = 0;
 var durationTime = 0;
-injectScript('https://cdn.jsdelivr.net/pyodide/v0.22.0/full/pyodide.js', addButton);
+injectScript('https://cdn.jsdelivr.net/pyodide/v0.27.2/full/pyodide.js', addButton);
